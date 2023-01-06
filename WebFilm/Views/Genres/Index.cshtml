@@ -1,0 +1,37 @@
+﻿@model IEnumerable<WebFilm.Models.Genre>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Quản lý kiểu film</h2>
+<p>
+    @Html.ActionLink("Trở lại", "Index", "Films")
+</p>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Genrename)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genrename)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.GenreID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.GenreID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.GenreID })
+            </td>
+        </tr>
+    }
+
+</table>

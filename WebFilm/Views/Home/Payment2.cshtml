@@ -1,0 +1,31 @@
+﻿@model IEnumerable<WebFilm.Models.Packet>
+
+@{
+    ViewBag.Title = "Payment2";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h1>Thanh toán</h1>
+<form action="/Home/ToPays" method="post">
+    Gói:<select class="form-select" aria-label="Default select example" name="Package" class="form-control">
+        @foreach (var item in Model)
+        {
+            <option value="@item.PacketId"> @Html.DisplayFor(modelItem => item.PacketName)</option>
+        }
+    </select>
+    <br><br>
+    Số tháng mua:<input type="number" name="Month">
+    <br><br>
+    Voucher:<select class="form-select" aria-label="Default select example" name="voucherid" class="form-control">
+    @foreach (var item in ViewBag.voucher)
+    {
+        if(item.Status==true)
+        {
+            <option value="@item.VoucherID">Vé @item.VoucherID:  Giá tiền giảm: @item.Voucher.Num_Discount</option>
+        }
+    }
+
+</select>
+    <br>
+    <h3>Thanh toán<input type="submit" class="form-control"></h3>
+</form>
+

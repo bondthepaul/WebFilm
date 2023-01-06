@@ -1,0 +1,37 @@
+﻿@model IEnumerable<WebFilm.Models.Country>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Quản lý quốc gia</h2>
+<p>
+    @Html.ActionLink("Trở lại", "Index", "Films")
+</p>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Countryname)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Countryname)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.CountryID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.CountryID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.CountryID })
+            </td>
+        </tr>
+    }
+
+</table>

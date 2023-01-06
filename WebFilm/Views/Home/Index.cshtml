@@ -1,0 +1,93 @@
+﻿@model IEnumerable<WebFilm.Models.Film>
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h3>Tìm kiếm Film</h3>
+<form action="/Home/Index" method="post">
+    <table class="table">
+        <tr>
+            <td>
+                <span class="input-group-text" style="width:300px;margin:0px;font-size:15px">Tên Film:@Html.TextBox("SearchString", "", new { @class = "form-control" })</span>
+            </td>
+            <td>
+                <span class="input-group-text" style="width:320px;height:43.5px ;margin:0px;font-size:15px">Loại sách: @Html.DropDownList("genresID", "Tất cả")</span>
+            </td>
+            <td>
+                <span class="input-group-text" style="width:300px;margin:0px;font-size:15px">Nhà xuất bản: @Html.TextBox("Author", "", new { @class = "form-control" })</span>
+            </td>
+            <td>
+                <input type="submit" value="Search" class="btn btn-danger" style="margin-top:5px" />
+            </td>
+
+        </tr>
+    </table>
+
+</form>
+
+@if (Session["Timkiem"].ToString().CompareTo("-1") == 0)
+{
+    foreach (var i in ViewBag.genres)
+    {
+        <hr class="rounded">
+        <h3>@i.Genrename <a href="/Genres/Details/@i.GenreID" class="btn btn-primary"> Xem thêm </a></h3>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; ">
+            @foreach (var item in Model)
+            {
+                if (item.GenreID == i.GenreID)
+                {
+                    <div class="card mb-3" style="max-width:360px;margin-left:10px;padding-left:15px">
+                        <div class="row g-0">
+                            <div class="col-md-6" style="margin:0px;padding:0px">
+                                <img src="@Html.DisplayFor(modelItem => item.Poster)" class="img-fluid rounded-start" alt="...">
+                                <div class="card-body bg-dark" align="center">
+                                    <a class="btn btn-success" href="/Home/Details/@item.FilmID" style="width:128px;margin-bottom:5px"> Xem phim </a>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6" style="margin:0px;padding-right:15px;padding-left:0px">
+                                <div class="card-header">@Html.DisplayFor(modelItem => item.Filmname)</div>
+                                <div class="card-body">
+                                    <p class="card-text">Thể loại: @i.Genrename</p>
+                                    <p class="card-text">Nhà xuất bản: @Html.DisplayFor(modelItem => item.Author.Fullname)</p>
+                                    <p class="card-text">Xuất bản năm: @Html.DisplayFor(modelItem => item.ReleaseDay)</p>
+                                    <p class="card-text">Đánh giá: @Html.DisplayFor(modelItem => item.Rating)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    }
+
+}
+else
+{
+<div style="display: flex; flex-wrap: wrap; justify-content: center; ">
+    @foreach (var item in Model)
+    {
+    <div class="card mb-3" style="max-width:360px;margin-left:10px;padding-left:15px">
+        <div class="row g-0">
+            <div class="col-md-6" style="margin:0px;padding:0px">
+                <img src="@Html.DisplayFor(modelItem => item.Poster)" class="img-fluid rounded-start" alt="...">
+                <div class="card-body bg-dark" align="center">
+                    <a class="btn btn-success" href="/Home/Details/@item.FilmID" style="width:128px;margin-bottom:5px"> Xem phim </a>
+
+                </div>
+            </div>
+            <div class="col-md-6" style="margin:0px;padding-right:15px;padding-left:0px">
+                <div class="card-header">@Html.DisplayFor(modelItem => item.Filmname)</div>
+                <div class="card-body">
+                    <p class="card-text">Thể loại:  @Html.DisplayFor(modelItem => item.Genre.Genrename)</p>
+                    <p class="card-text">Nhà xuất bản: @Html.DisplayFor(modelItem => item.Author.Fullname)</p>
+                    <p class="card-text">Xuất bản năm: @Html.DisplayFor(modelItem => item.ReleaseDay)</p>
+                    <p class="card-text">Đánh giá: @Html.DisplayFor(modelItem => item.Rating)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+</div>
+}

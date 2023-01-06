@@ -1,0 +1,41 @@
+﻿@model IEnumerable<WebFilm.Models.UserVoucher>
+
+@{
+    ViewBag.Title = "DetailsUser";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Chi tiết danh sách voucher mà người dùng có</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateForUser")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.VoucherID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Voucher.Num_Discount)
+        </th>
+        
+    </tr>
+
+@foreach (var item in Model)
+{
+    if (item.Status == true)
+    {
+    <tr>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.VoucherID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Voucher.Num_Discount)
+        </td>
+        
+    </tr>
+    }
+}
+
+</table>

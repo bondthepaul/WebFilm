@@ -1,0 +1,30 @@
+﻿@model IEnumerable<WebFilm.Models.Genre>
+
+@{
+    ViewBag.Title = "IndexGenre";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Thể loại film</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Genrename)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Genrename)
+        </td>
+        <td>
+            @Html.ActionLink("Vào trang", "Index", new { genresID = item.GenreID }) 
+            
+        </td>
+    </tr>
+}
+
+</table>

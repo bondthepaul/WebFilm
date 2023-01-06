@@ -1,0 +1,37 @@
+﻿@model IEnumerable<WebFilm.Models.Author>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Quản lý nhà sản xuất</h2>
+<p>
+    @Html.ActionLink("Trở lại", "Index", "Films")
+</p>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Fullname)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fullname)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.AuthorID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.AuthorID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.AuthorID })
+            </td>
+        </tr>
+    }
+
+</table>

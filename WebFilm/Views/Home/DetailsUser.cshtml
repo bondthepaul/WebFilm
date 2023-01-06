@@ -1,0 +1,71 @@
+﻿@model WebFilm.Models.User
+
+@{
+    ViewBag.Title = "DetailsUser";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>DetailsUser</h2>
+
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+
+        <dt>
+            Tên người dùng
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fullname)
+        </dd>
+
+        <dt>
+            Email:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            Số điện thoại:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+           Địa chỉ:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Chỉnh sửa thông tin", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Trở lại trang chủ", "Index")
+</p>
+@foreach (var item in ViewBag.history)
+{
+    <tr>
+        <td>@item.User.Username</td>
+        <td>@item.VoucherID</td>
+        <td>@item.Packet.PacketName</td>
+        <td>@item.Money Đ</td>
+
+    </tr>
+}

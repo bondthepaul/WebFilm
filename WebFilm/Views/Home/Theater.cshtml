@@ -1,0 +1,43 @@
+﻿@model WebFilm.Models.Film
+
+@{
+    ViewBag.Title = "Theater";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div align="center">
+    <h1>@Html.DisplayFor(model => model.Filmname) (@Html.DisplayFor(model => model.Genre.Genrename))</h1>
+</div>
+
+<div style="width:100%;height:600px;" align="center" >
+    <iframe id="Iframe1" style="background-color: White !important; border: 0; margin:auto" width="80%" height="100%" src="@Html.DisplayFor(model => model.FilmPath)" scrolling="no" allowfullscreen></iframe>
+</div>
+<h1>Phần đánh giá</h1>
+<h3>Đánh giá: @Html.DisplayFor(model => model.Rating)</h3>
+<form action="/Home/Rating" method="post">
+    <input name="FilmID" class="form-control" type="number" value=@Html.DisplayFor(model => model.FilmID) hidden />
+    <input name="Rating" class="form-control" type="number"  />
+    <input type="submit" value="Đánh giá" class="btn btn-danger" onclick="return confirm('Đánh giá đã gửi');" />
+</form>
+<h1>Phần bình luận</h1>
+<div>
+    <h3>Bình luận</h3>
+        @foreach (var item in @ViewBag.comments)
+        {
+            if (item.FilmID == Model.FilmID)
+            {
+        <div style="border: dashed 1px;">
+            <p>Bởi <b>@item.User.Username</b> Vào lúc : @item.TimeStamp</p>
+            <p>@item.Des</p>
+        </div>
+            }
+        }
+<form action="/Home/Theater" method="post">
+    <input name="UserID" class="form-control" type="number" value=@Session["userid"] hidden />
+    <input name="FilmID" class="form-control" type="number" value=@Html.DisplayFor(model => model.FilmID) hidden />
+    <input name="Des" class="form-control" type="text" />
+    <input type="submit" value="Bình luận" class="btn btn-danger" onclick="return confirm('Bình luận đã gửi');" />
+</form>
+
+</div>
